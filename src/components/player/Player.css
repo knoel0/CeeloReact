@@ -1,16 +1,37 @@
-.name {
-    color: #FFF;
+.player-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0px 20px;
+    text-align: center;
+    background-color: #FFF;
+    width: 100%;
 }
 
-.score {
-    color: indianred;
+.player-container h1 {
+    color: #000;
 }
 
-.btn {
-    background-color: indianred;
-    color: white;
+.player-container h3 {
+    color: #000;
+}
+
+.player-container button {
+    background-color: #E3D4AD;
+    opacity: 0.7;
+    transition: 0.3s;
+    color: #000;
     font-size: 20px;
     padding: 12px 28px;
     border-radius: 12px;
-    border: 2px solid white;
+    border: 2px solid #E3D4AD;;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.player-container button:hover {
+    opacity: 1;
+}
+
+.player-container button:active {
+    opacity: 1;
 }

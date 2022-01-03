@@ -5,7 +5,7 @@ import Modal from '../../components/modal/Modal';
 import './Game.css';
 
 export default function Game() {
-
+    
     const location = useLocation();
     let history = useHistory();
 
@@ -18,6 +18,7 @@ export default function Game() {
         inCurrentGame: location.state.inCurrentGame,
         playerRerender: location.state.rerender
     }
+
     const [gameState, setGameState] = useState({
         playerIds: location.state.ids,
         playerNames: location.state.names,
@@ -88,7 +89,6 @@ export default function Game() {
     })
 
     const [rerenderPlayerOnPlayAgain, setRerenderPlayerOnPlayAgain] = useState(false);
-
     const allEqual = arr => arr.every(v => v === arr[0]);
 
     function ifWinner(winner) {
@@ -113,7 +113,9 @@ export default function Game() {
 
     function tieAmongWinners(scores)  {
         let scoresCopy = [...(scores)];
-        const sortedArr = scoresCopy.sort(function(a, b) {return b - a});
+        const sortedArr = scoresCopy.sort(function(a, b) {
+            return b - a 
+        });
         if (sortedArr[0] > sortedArr[1]) { 
             return false;
         } else {
@@ -128,22 +130,27 @@ export default function Game() {
             let winnerCopyItem = winnerCopy[index];
             winnerCopyItem = true;
             winnerCopy[index] = winnerCopyItem;
+            
             setGameState({
                 ...gameState,
                 winner: winnerCopy
             });
+
         }  if (gameState.scores.some(if_123)) {
             const index = gameState.scores.indexOf(-1);
             let inCurrentGameCopy = [...gameState.inCurrentGame];
             let inCurrentGameCopyItem = inCurrentGameCopy[index];
             inCurrentGameCopyItem = false;
             inCurrentGameCopy[index] = inCurrentGameCopyItem;
+            
             setGameState({
                 ...gameState,
                 inCurrentGame: inCurrentGameCopy
             });
+
         } if (gameState.scores.every(allPlayed)) {
             if (allEqual(gameState.scores)) {
+                
                 setGameState({
                     playerIds: initialState.playerIds,
                     playerNames: initialState.playerNames,
@@ -152,14 +159,17 @@ export default function Game() {
                     activePlayer: initialState.activePlayer,
                     inCurrentGame: initialState.inCurrentGame
                 });
+
             } else if (tieAmongWinners(gameState.scores)) {
                 const winningScore = Math.max(...(gameState.scores));
                 let indexArr = [];
+                
                 for (let i = 0; i < gameState.scores.length; i++) {
                     if (gameState.scores[i] !== winningScore) {
                         indexArr.push(i);
                     }
                 }
+
                 let inCurrentGameCopy = [...gameState.inCurrentGame];
                 let activePlayerCopy = [...gameState.activePlayer];
                 for (let i = 0; i < indexArr.length; i++) {
@@ -207,7 +217,7 @@ export default function Game() {
             setModalState({
                 ...modalState,
                 isOpen: true,
-                message: "" + gameState.playerNames[index] + " Won!",
+                message: `${gameState.playerNames[index]} Won!`,
                 buttons: {
                     ...modalState.buttons,
                     playAgainBtn: {...modalState.buttons.playAgainBtn, enabled: true},
@@ -221,14 +231,16 @@ export default function Game() {
 
     useEffect(() => {
         if (gameState.inCurrentGame.some(ifPlayerEliminated)) {
-            
             const index = gameState.inCurrentGame.indexOf(false);
             
             setModalState({
                 ...modalState,
                 isOpen: true,
-                message: "" + gameState.playerNames[index] + " has been eliminated.",
-                buttons: {...modalState.buttons, closeBtn: {...modalState.buttons.closeBtn, enabled: true}}
+                message: `${gameState.playerNames[index]} has been eliminated.`,
+                buttons: {
+                    ...modalState.buttons,
+                    closeBtn: {...modalState.buttons.closeBtn, enabled: true}
+                }
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -294,17 +306,18 @@ export default function Game() {
     const players = [];
 
     for (let i = 0; i < gameState.playerNames.length; i++) {
+        
         if (gameState.inCurrentGame[i] === true) {
             players.push(
                 <Player 
-                    id={gameState.playerIds[i]}
-                    name={gameState.playerNames[i]}
-                    score={gameState.scores[i]}
-                    winner={gameState.winner[i]}
-                    active={gameState.activePlayer[i]}
-                    inCurrentGame={gameState.inCurrentGame[i]}
-                    clickHandler={handleClick}
-                    rerender={rerenderPlayerOnPlayAgain}
+                    id={ gameState.playerIds[i] }
+                    name={ gameState.playerNames[i] }
+                    score={ gameState.scores[i] }
+                    winner={ gameState.winner[i] }
+                    active={ gameState.activePlayer[i] }
+                    inCurrentGame={ gameState.inCurrentGame[i] }
+                    clickHandler={ handleClick }
+                    rerender={ rerenderPlayerOnPlayAgain }
                 />
             )
         }
@@ -312,10 +325,10 @@ export default function Game() {
 
     return (       
         <>
-        <div className="main">
+        <div className="game-container">
             {players}
         </div>
-        <Modal state={modalState} />
+        <Modal state={ modalState } />
         </>    
     )
 }

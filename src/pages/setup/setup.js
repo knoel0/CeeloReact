@@ -8,7 +8,6 @@ export default function Setup() {
 
     const [numPlayers, setNumPlayers] = useState(3)
     const numFields = numPlayers
-
     const [inputs, setInput] = useState([])
     
     const handleInputChange = (e) => setInput({
@@ -33,11 +32,13 @@ export default function Setup() {
             idInit.push(i);
             scoresInit.push(undefined);
             winnerInit.push(false);
+            
             if (i === 0) {
                 activePlayerInit.push(true);
             } else {
             activePlayerInit.push(false);
             }
+            
             inCurrentGameInit.push(true);
         }
         
@@ -60,26 +61,26 @@ export default function Setup() {
         fields.push(<input
             type="text"
             required
-            name={"Player " + [i + 1].toString()}
+            name={`Player ${[i + 1].toString()}`}
             onChange={handleInputChange}
-            placeholder={"Player " + [i + 1].toString()}
+            placeholder={`Player ${[i + 1].toString()}`}
         />);
     }
 
     return (
-        <div className="container">
-            <div className="text-container">
+        <div className="setup-container">
+            <div className="setup-title-container">
                 <h1>Select the number of players:</h1>
             </div>
-            <div className="button-container">
+            <div className="setup-button-container">
                 <button onClick={() => clickHandler(3)}>3</button>
                 <button onClick={() => clickHandler(4)}>4</button>
                 <button onClick={() => clickHandler(5)}>5</button>
             </div>
-            <div className="form-container">
+            <div className="setup-form-container">
                 <form autocomplete="off" onSubmit={submitHandler}>
                     {fields}
-                    <button type="submit">Game On!</button>
+                    <button type="submit">Game On</button>
                 </form>
             </div>
         </div>

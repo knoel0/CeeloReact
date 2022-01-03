@@ -2,17 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Roll from '../roll/Roll';
 import './Player.css';
 
-export default function Player( {id, name, score, winner, active, inCurrentGame, clickHandler, rerender} ) {
+export default function Player({ id, name, score, winner, active, inCurrentGame, clickHandler, rerender }) {
 
     const [STYLE, setSTYLE] = useState({
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        padding: '0px 20px',
-        textAlign: 'center',
-        backgroundColor: 'lightcoral',
-        border: '1px solid white',
-        width: '100%'
+        border: '1px solid #000'
     })
 
     const [diceRoll, setDiceRoll] = useState([]);
@@ -30,7 +23,7 @@ export default function Player( {id, name, score, winner, active, inCurrentGame,
             setDiceRoll([]);
             setSTYLE({
                 ...STYLE,
-                border: '1px solid white'
+                border: '1px solid #000'
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,18 +48,18 @@ export default function Player( {id, name, score, winner, active, inCurrentGame,
         if (inCurrentGame && winner) {
             setSTYLE({
                 ...STYLE,
-                border: '2px solid green'
+                border: '2px solid #00FF00'
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [winner])
     
     return (
-        <div style={STYLE}>
-            <h1 className="name">{name}</h1>
-            <h3 className="score">{score}</h3>
+        <div className="player-container" style={STYLE}>
+            <h1>{name}</h1>
+            <h3>{score}</h3>
             <Roll roll={diceRoll} />
-            <button className="btn"
+            <button
                 onClick={rollDice}
                 disabled={!active}
                 >Roll

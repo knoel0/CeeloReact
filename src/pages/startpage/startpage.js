@@ -7,11 +7,11 @@ export default function StartPage() {
     let history = useHistory();
 
     return (
-        <div className="container">
-            <div className="text-container">
+        <div className="startpage-container">
+            <div className="startpage-title-container">
                 <h1>CEE-LO</h1>
             </div>
-            <button className="startBtn"
+            <button
                 onClick = {() =>
                     history.push({
                         pathname: '/Setup'
@@ -21,4 +21,4 @@ export default function StartPage() {
             </button>
         </div>
     );
-};
+}
