@@ -9,6 +9,9 @@
 # production
 /build
 
+# github
+/.github
+
 # firebase
 /.firebase
 .firebaserc
@@ -16,6 +19,8 @@ firebase.json
 
 package-lock.json
 package.json
+
+notes.txt
 
 # misc
 .DS_Store
